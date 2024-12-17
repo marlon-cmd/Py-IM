@@ -1,73 +1,71 @@
-{% extends 'myapp/base.html' %}  
+{% extends 'myapp/base.html' %}
 
-{% block title %}Book List - Book Manager{% endblock %}  
+{% block title %}Book List - Book Manager{% endblock %}
 
-{% block content %}  
-<div class="container my-4">  
-    <h2 class="text-center mb-4">Book Catalog</h2>  
-    <div class="mb-3">  
-        <!-- Add Book Button -->  
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">  
-            Add New Book  
-        </button>  
-    </div>  
-    <div class="row">  
-        {% for book in books %}  
-        <div class="col-md-4">  
-            <div class="card shadow-sm mb-4">  
-                {% if book.image and book.image.url %}  
-                <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">  
-                {% else %}  
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="No Image Available">  
-                {% endif %}  
-                <div class="card-body">  
-                    <h5 class="card-title">{{ book.title }}</h5>  
-                    <h6 class="card-subtitle mb-2 text-muted">by {{ book.author }}</h6>  
-                    <p class="card-text">{{ book.description|truncatechars:100 }}</p>  
-                    <div class="d-flex justify-content-between">  
-                        <a href="{% url 'book_detail' book.pk %}" class="btn btn-info btn-sm">View</a>  
-                        <a href="{% url 'book_update' book.pk %}" class="btn btn-warning btn-sm">Edit</a>  
-                        <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger btn-sm">Delete</a>  
-                    </div>  
-                </div>  
-            </div>  
-        </div>  
-        {% empty %}  
-        <div class="col-12">  
-            <p class="text-center text-muted">No books available. Add one using the button above.</p>  
-        </div>  
-        {% endfor %}  
-    </div>  
-</div>  
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4 text-primary fw-bold">📖 Book Catalog</h2>
+    <div class="mb-3 text-end">
+        <button type="button" class="btn btn-lg btn-success shadow-lg" data-bs-toggle="modal" data-bs-target="#addBookModal">
+            <i class="bi bi-plus-circle me-2"></i>Add New Book
+        </button>
+    </div>
+    <div class="row">
+        {% for book in books %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 rounded-4">
+                {% if book.image and book.image.url %}
+                <img src="{{ book.image.url }}" class="card-img-top rounded-top-4" alt="{{ book.title }}">
+                {% else %}
+                <img src="https://via.placeholder.com/300x200" class="card-img-top rounded-top-4" alt="No Image Available">
+                {% endif %}
+                <div class="card-body bg-light">
+                    <h5 class="card-title text-success fw-bold">{{ book.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">by {{ book.author }}</h6>
+                    <p class="card-text">{{ book.description|truncatechars:80 }}</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'book_detail' book.pk %}" class="btn btn-info btn-sm px-3">View</a>
+                        <a href="{% url 'book_update' book.pk %}" class="btn btn-warning btn-sm px-3">Edit</a>
+                        <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger btn-sm px-3">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center">No books available. Add one using the button above.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-<!-- Add New Book Modal -->  
-<div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="addBookModalLabel" aria-hidden="true">  
-    <div class="modal-dialog">  
-        <div class="modal-content">  
-            <div class="modal-header">  
-                <h5 class="modal-title" id="addBookModalLabel">Add New Book</h5>  
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>  
-            </div>  
-            <div class="modal-body">  
-                <form method="POST" action="{% url 'book_create' %}">  
-                    {% csrf_token %}  
-                    <div class="mb-3">  
-                        <label for="bookTitle" class="form-label">Book Title</label>  
-                        <input type="text" class="form-control" id="bookTitle" name="title" required>  
-                    </div>  
-                    <div class="mb-3">  
-                        <label for="bookAuthor" class="form-label">Author</label>  
-                        <input type="text" class="form-control" id="bookAuthor" name="author" required>  
-                    </div>  
-                    <div class="mb-3">  
-                        <label for="bookDescription" class="form-label">Description</label>  
-                        <textarea class="form-control" id="bookDescription" name="description" required></textarea>  
-                    </div>  
-                    <button type="submit" class="btn btn-primary">Add Book</button>  
-                </form>  
-            </div>  
-        </div>  
-    </div>  
-</div>  
-
+<!-- Add New Book Modal -->
+<div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="addBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="addBookModalLabel">Add New Book</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'book_create' %}" class="p-3">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="bookTitle" class="form-label">Book Title</label>
+                        <input type="text" class="form-control rounded-3" id="bookTitle" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bookAuthor" class="form-label">Author</label>
+                        <input type="text" class="form-control rounded-3" id="bookAuthor" name="author" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bookDescription" class="form-label">Description</label>
+                        <textarea class="form-control rounded-3" id="bookDescription" name="description" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg shadow">Add Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
