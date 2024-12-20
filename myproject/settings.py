@@ -84,16 +84,16 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # }
 
 # -----------MYSQL------------#
-# DATABASES = {  
-#     'default': {  
-#         'ENGINE': 'django.db.backends.mysql',  
-#         'NAME': 'db_myproject',  
-#         'USER': 'root',  
-#         'PASSWORD': '092003',  
-#         'HOST': '127.0.0.1',  
-#         'PORT': '3306',  
-#     }  
-# }
+DATABASES = {  
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'django_db',  
+        'USER': 'root',  
+        'PASSWORD': '082305',  
+        'HOST': '127.0.0.1',  
+        'PORT': '3306',  
+    }  
+}
 
 # ----------MariaDB----------#
 # DATABASES = {  
@@ -108,16 +108,16 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # }
 
 #---------POSTGRESQL---------#
-DATABASES = {  
-    'default': {  
-        'ENGINE': 'django.db.backends.postgresql',  
-        'NAME': 'db_myproject2',
-        'USER': 'postgres',  
-        'PASSWORD': '123456789',
-        'HOST': 'localhost',  
-        'PORT': '5432',  
-    }  
-}
+# DATABASES = {  
+#     'default': {  
+#         'ENGINE': 'django.db.backends.postgresql',  
+#         'NAME': 'db_myproject2',
+#         'USER': 'postgres',  
+#         'PASSWORD': '123456789',
+#         'HOST': 'localhost',  
+#         'PORT': '5432',  
+#     }  
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
